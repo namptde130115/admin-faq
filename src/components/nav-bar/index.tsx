@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
-import { Menu } from 'antd';
+import { Menu, Avatar } from 'antd';
+import { LogoutIcon } from 'assets/icons/exit';
 import {
-  MailOutlined,
   AppstoreOutlined,
-  SettingOutlined,
+  HomeOutlined,
+  InfoCircleOutlined,
+  UserOutlined,
+  LineChartOutlined,
+  WechatOutlined,
 } from '@ant-design/icons';
 import styles from './index.module.scss';
 import clsx from 'clsx';
@@ -26,55 +30,62 @@ export const NavBar: React.FC = () => {
         style={{ width: 100 }}
       >
         <Menu.Item
-          key='mail'
-          icon={<MailOutlined className={styles.nav__menuItem__icon} />}
-          className={styles.nav__menuItem}
-        ></Menu.Item>
-        <Menu.Item
-          key='app'
+          key='qa'
           icon={<AppstoreOutlined className={styles.nav__menuItem__icon} />}
           className={styles.nav__menuItem}
         ></Menu.Item>
         <Menu.Item
-          key='aaa'
-          icon={<SettingOutlined className={styles.nav__menuItem__icon} />}
+          key='widget'
+          icon={<WechatOutlined className={styles.nav__menuItem__icon} />}
           className={styles.nav__menuItem}
         ></Menu.Item>
         <Menu.Item
-          key='alipay'
-          icon={<AppstoreOutlined className={styles.nav__menuItem__icon} />}
+          key='analysis'
+          icon={<LineChartOutlined className={styles.nav__menuItem__icon} />}
           className={styles.nav__menuItem}
         ></Menu.Item>
       </Menu>
 
-      <Menu
-        className={clsx(styles.nav__menu, styles.bottom)}
-        onClick={handleClick}
-        selectedKeys={[current]}
-        mode='inline'
-        style={{ width: 100 }}
-      >
-        <Menu.Item
-          key='mail'
-          icon={<MailOutlined className={styles.nav__menuItem__icon} />}
-          className={styles.nav__menuItem}
-        ></Menu.Item>
-        <Menu.Item
-          key='app'
-          icon={<AppstoreOutlined className={styles.nav__menuItem__icon} />}
-          className={styles.nav__menuItem}
-        ></Menu.Item>
-        <Menu.Item
-          key='aaa'
-          icon={<SettingOutlined className={styles.nav__menuItem__icon} />}
-          className={styles.nav__menuItem}
-        ></Menu.Item>
-        <Menu.Item
-          key='alipay'
-          icon={<AppstoreOutlined className={styles.nav__menuItem__icon} />}
-          className={styles.nav__menuItem}
-        ></Menu.Item>
-      </Menu>
+      <div>
+        <Menu
+          className={clsx(styles.nav__menu, styles.bottom)}
+          onClick={handleClick}
+          selectedKeys={[current]}
+          mode='inline'
+          style={{ width: 100 }}
+        >
+          <Menu.Item
+            key='account'
+            icon={<UserOutlined className={styles.nav__menuItem__icon} />}
+            className={styles.nav__menuItem}
+          ></Menu.Item>
+          <Menu.Item
+            key='infor'
+            icon={<InfoCircleOutlined className={styles.nav__menuItem__icon} />}
+            className={styles.nav__menuItem}
+          ></Menu.Item>
+          <Menu.Item
+            key='home'
+            icon={<HomeOutlined className={styles.nav__menuItem__icon} />}
+            className={styles.nav__menuItem}
+          ></Menu.Item>
+        </Menu>
+
+        <div className={styles.logout}>
+          <div className={styles.logout__inner}>
+            <Avatar
+              size={40}
+              style={{ backgroundColor: 'var(--color-blue-70)' }}
+            >
+              N
+            </Avatar>
+          </div>
+          <div className={styles.logout__inner}>
+            <LogoutIcon />
+            <span>ログアウト</span>
+          </div>
+        </div>
+      </div>
     </nav>
   );
 };

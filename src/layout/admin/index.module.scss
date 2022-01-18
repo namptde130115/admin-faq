@@ -17,15 +17,19 @@
   min-height: 100vh;
   position: relative;
   background: var(--color-blue-5);
-  > div {
+  > .footer {
     bottom: 0;
     background: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
     width: 100%;
     height: 56px;
     font-size: 18px;
   }
+}
+
+.body {
+  // height: 300px !important;
+  flex: 1;
 }

@@ -54,3 +54,24 @@ $item-menu-size: 40px;
 .bottom {
   margin-bottom: 30px !important;
 }
+
+.logout {
+  width: 100%;
+}
+
+.logout__inner {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 20px;
+  cursor: pointer;
+  > span {
+    font-size: 10px;
+  }
+  &:last-child {
+    border-top: 2px solid #b4b4bb;
+    padding-top: 10px;
+    margin: 0 22px;
+  }
+}
