@@ -18,9 +18,10 @@ export const InforPage: React.FC = () => {
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm<IFormInput>();
+  } = useForm<IFormInput>({ mode: 'onBlur' });
+
   let formData = {
-    oldPass: 'aaa',
+    oldPass: '',
     newPass: 'bbb',
     confirmNewPass: 'bbb',
   };
@@ -43,25 +44,32 @@ export const InforPage: React.FC = () => {
         >
           <div className={styles.form__item}>
             <label>現在のパスワード</label>
-            <input
-              type='text'
-              {...register('formData.oldPass', {
-                validate: {
-                  positive: (v) => parseInt(v) > 0,
-                },
-              })}
-            />
-            {errors?.formData?.oldPass?.type === 'positive' && (
-              <p>This field is required</p>
-            )}
+            <div>
+              <input
+                type='text'
+                {...register('formData.oldPass', {
+                  validate: {
+                    positive: (v) => v.trim().length > 0,
+                  },
+                  onBlur: (e) => console.log(e),
+                })}
+              />
+              {errors?.formData?.oldPass?.type === 'positive' && (
+                <p>not contains space</p>
+              )}
+            </div>
           </div>
           <div className={styles.form__item}>
             <label>新しいパスワード</label>
-            <input type='text' {...register('formData.newPass')} />
+            <div>
+              <input type='text' {...register('formData.newPass')} />
+            </div>
           </div>
           <div className={styles.form__item}>
             <label>新しいパスワード（確認）</label>
-            <input type='text' {...register('formData.confirmNewPass')} />
+            <div>
+              <input type='text' {...register('formData.confirmNewPass')} />
+            </div>
           </div>
         </form>
       </div>

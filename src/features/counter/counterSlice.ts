@@ -7,6 +7,13 @@ export interface CounterState {
   status: 'idle' | 'loading' | 'failed';
 }
 
+export interface User {
+  id: string
+  first_name: string
+  last_name: string
+  email: string
+}
+
 const initialState: CounterState = {
   value: 0,
   status: 'idle',
@@ -78,5 +85,22 @@ export const incrementIfOdd = (amount: number): AppThunk => (
     dispatch(incrementByAmount(amount));
   }
 };
+
+export const getProducts = createAsyncThunk('getProducts', async (payload:number, { rejectWithValue, dispatch }) => {
+  try {
+    const response = await fetchCount(payload);
+    // The value we return becomes the `fulfilled` action payload
+    setTimeout(() => {
+      dispatch(incrementByAmount(payload))
+    },0)
+    return response.data;
+  } catch (err:any) {
+    // let error: AxiosError<ValidationErrors> = err
+    if (!err.response) {
+      throw err
+    }
+    return rejectWithValue(err.response.data)
+  }
+})
 
 export default counterSlice.reducer;

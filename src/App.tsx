@@ -12,7 +12,8 @@ function App() {
     <LayoutAdmin>
       {/* <QaPage /> */}
       {/* <WidgetSettingPage /> */}
-      <InforPage />
+      {/* <InforPage /> */}
+      <UserPage />
     </LayoutAdmin>
   );
 }

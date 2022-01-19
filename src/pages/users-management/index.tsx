@@ -1,15 +1,17 @@
 import React from 'react';
 import { CreateForm } from 'pages/users-management/create-form/index';
+import { TableUser } from 'pages/users-management/table-user';
+import clsx from 'clsx';
+import { Button } from 'antd';
 
-interface Props {
-  a?: string;
-  b?: number;
-}
-
-export const UserPage: React.FC<Props> = ({ a, b }) => {
+export const UserPage: React.FC = () => {
   return (
-    <div>
-      <CreateForm />
+    <div className={clsx('div__content')}>
+      {console.log('aaaa')}
+      <div>
+        <Button>add</Button>
+      </div>
+      <TableUser />
     </div>
   );
 };
