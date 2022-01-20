@@ -1,50 +1,46 @@
-import React from 'react';
-import { Table, Tag, Space } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Table, Space, Button, Modal } from 'antd';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
+import { fetchListUser, getListUser } from 'redux/user-slice';
 
-export const TableUser: React.FC = () => {
+interface IProps {
+  visibleCreate: boolean;
+}
+
+export const TableUser: React.FC<IProps> = ({ visibleCreate }) => {
+  const dispatch = useAppDispatch();
+  const dataFetch = useAppSelector(getListUser);
+  const [detailVisible, setDetailVisible] = useState<boolean>(false);
+
+  const handleMore = () => {
+    setDetailVisible(true);
+  };
+  const handleOk = () => {
+    setDetailVisible(false);
+  };
+  useEffect(() => {
+    dispatch(fetchListUser());
+  }, []);
+
   const columns = [
     {
-      title: 'Name',
-      dataIndex: 'name',
-      key: 'name',
-      render: (text: any) => <a>{text}</a>,
+      title: 'UserName',
+      dataIndex: 'userName',
+      key: 'userName',
     },
     {
-      title: 'Age',
-      dataIndex: 'age',
-      key: 'age',
-    },
-    {
-      title: 'Address',
-      dataIndex: 'address',
-      key: 'address',
-    },
-    {
-      title: 'Tags',
-      key: 'tags',
-      dataIndex: 'tags',
-      render: (tags: any) => (
-        <>
-          {tags.map((tag: any) => {
-            let color = tag.length > 5 ? 'geekblue' : 'green';
-            if (tag === 'loser') {
-              color = 'volcano';
-            }
-            return (
-              <Tag color={color} key={tag}>
-                {tag.toUpperCase()}
-              </Tag>
-            );
-          })}
-        </>
-      ),
+      title: 'Email',
+      dataIndex: 'email',
+      key: 'email',
     },
     {
       title: 'Action',
       key: 'action',
       render: (text: any, record: any) => (
         <Space size='middle'>
-          <a>More</a>
+          <Button type='link' onClick={handleMore}>
+            More
+          </Button>
           <a>Delete</a>
           <a>Edit</a>
         </Space>
@@ -52,71 +48,30 @@ export const TableUser: React.FC = () => {
     },
   ];
 
-  const data = [
-    {
-      key: 100,
-      name: 'John Brown 1',
-      age: 32,
-      address: 'New York No. 1 Lake Park',
-      tags: ['nice', 'developer'],
-    },
-    {
-      key: 101,
-      name: 'Jim Green 2',
-      age: 42,
-      address: 'London No. 1 Lake Park',
-      tags: ['loser'],
-    },
-    {
-      key: 102,
-      name: 'Joe Black 3',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park',
-      tags: ['cool', 'teacher'],
-    },
-    {
-      key: 103,
-      name: 'John Brown 4',
-      age: 32,
-      address: 'New York No. 1 Lake Park',
-      tags: ['nice', 'developer'],
-    },
-    {
-      key: 104,
-      name: 'Jim Green 5',
-      age: 42,
-      address: 'London No. 1 Lake Park',
-      tags: ['loser'],
-    },
-    {
-      key: 105,
-      name: 'Joe Black 6',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park',
-      tags: ['cool', 'teacher'],
-    },
-  ];
-
-  for (let i = 0; i < 100; i++) {
-    data.push({
-      key: i,
-      name: `Edward King ${i}`,
-      age: 32,
-      address: `London, Park Lane no. ${i}`,
-      tags: ['cool', 'teacher'],
-    });
-  }
+  const data: any[] = [];
+  dataFetch?.pagedResult?.items.map((item: { _id: any }) =>
+    data.push({ ...item, key: item._id })
+  );
 
   return (
-    <Table
-      onChange={(e) => {
-        console.log(e);
-      }}
-      // pagination={{ pageSize: 3 }}
-      // pagination={false}
-      columns={columns}
-      dataSource={data}
-      scroll={{ y: 240 }}
-    />
+    <>
+      <Table
+        onChange={(e) => {
+          console.log(e);
+        }}
+        columns={columns}
+        dataSource={data}
+        scroll={{ y: 240 }}
+      />
+      <Modal
+        title='Detail Infor'
+        visible={detailVisible}
+        onOk={handleOk}
+        onCancel={handleOk}
+        maskClosable={false}
+      >
+        asdasdasd
+      </Modal>
+    </>
   );
 };
