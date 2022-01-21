@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Table, Space, Button, Modal } from 'antd';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { fetchListUser, getListUser } from 'redux/user-slice';
+import { EditForm } from './edit-form';
 
 interface IProps {
   visibleCreate: boolean;
@@ -11,9 +12,15 @@ export const TableUser: React.FC<IProps> = ({ visibleCreate }) => {
   const dispatch = useAppDispatch();
   const dataFetch = useAppSelector(getListUser);
   const [detailVisible, setDetailVisible] = useState<boolean>(false);
-
+  const [visibleEdit, setVisibleEdit] = useState<boolean>(false);
   const handleMore = () => {
     setDetailVisible(true);
+  };
+  const handleEdit = () => {
+    setVisibleEdit(true);
+  };
+  const handleOkEdit = () => {
+    setVisibleEdit(false);
   };
   const handleOk = () => {
     setDetailVisible(false);
@@ -41,8 +48,12 @@ export const TableUser: React.FC<IProps> = ({ visibleCreate }) => {
           <Button type='link' onClick={handleMore}>
             More
           </Button>
-          <a>Delete</a>
-          <a>Edit</a>
+          <Button type='link' onClick={handleEdit}>
+            Delete
+          </Button>
+          <Button type='link' onClick={handleEdit}>
+            Edit
+          </Button>
         </Space>
       ),
     },
@@ -72,6 +83,12 @@ export const TableUser: React.FC<IProps> = ({ visibleCreate }) => {
       >
         asdasdasd
       </Modal>
+      <EditForm
+        formData={{ userName: 'nam', password: 'nam123123' }}
+        visible={visibleEdit}
+        onOk={handleOkEdit}
+        onCancel={handleOkEdit}
+      />
     </>
   );
 };
