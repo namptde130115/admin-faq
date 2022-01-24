@@ -16,6 +16,7 @@ export const UserPage: React.FC = () => {
   };
   return (
     <div className={clsx('div__content')}>
+      {console.log('UserPage')}
       <div>
         <Button onClick={addUser}>add</Button>
         <Button onClick={getToken}>Get Token</Button>

@@ -11,13 +11,22 @@ interface IProps {
 export const TableUser: React.FC<IProps> = ({ visibleCreate }) => {
   const dispatch = useAppDispatch();
   const dataFetch = useAppSelector(getListUser);
+  const [items, setItems] = useState([
+    { id: '1', name: 'nam' },
+    { id: '2', name: 'nam2' },
+  ]);
   const [detailVisible, setDetailVisible] = useState<boolean>(false);
   const [visibleEdit, setVisibleEdit] = useState<boolean>(false);
+
   const handleMore = () => {
     setDetailVisible(true);
   };
   const handleEdit = () => {
     setVisibleEdit(true);
+    setItems([
+      { id: '1', name: 'nam' },
+      { id: '2', name: 'nam2' },
+    ]);
   };
   const handleOkEdit = () => {
     setVisibleEdit(false);
@@ -25,9 +34,22 @@ export const TableUser: React.FC<IProps> = ({ visibleCreate }) => {
   const handleOk = () => {
     setDetailVisible(false);
   };
+
   useEffect(() => {
     dispatch(fetchListUser());
   }, []);
+
+  const handleAddField = () => {
+    console.log('handleAddField');
+    setItems([...items, { id: '', name: '' }]);
+  };
+
+  const handleRemoveField = (index: any) => {
+    console.log('handleRemoveField: ' + index);
+    let cloneItems = [...items];
+    cloneItems.splice(parseInt(index), 1);
+    setItems(cloneItems);
+  };
 
   const columns = [
     {
@@ -66,6 +88,7 @@ export const TableUser: React.FC<IProps> = ({ visibleCreate }) => {
 
   return (
     <>
+      {console.log('render TableUser')}
       <Table
         onChange={(e) => {
           console.log(e);
@@ -84,10 +107,16 @@ export const TableUser: React.FC<IProps> = ({ visibleCreate }) => {
         asdasdasd
       </Modal>
       <EditForm
-        formData={{ userName: 'nam', password: 'nam123123' }}
+        formData={{
+          userName: 'nam',
+          password: 'nam123123',
+          items: items,
+        }}
         visible={visibleEdit}
         onOk={handleOkEdit}
         onCancel={handleOkEdit}
+        onAddField={handleAddField}
+        onRemoveField={handleRemoveField}
       />
     </>
   );
