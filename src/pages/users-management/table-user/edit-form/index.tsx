@@ -4,7 +4,30 @@ import styles from './index.module.scss';
 import { FormItem } from 'components/form-item';
 import { useForm } from 'react-hook-form';
 
-export const EditForm = ({ visible, onOk, onCancel, formData, onAddField, onRemoveField }) => {
+type IProps = {
+  visible: boolean;
+  onOk: () => void;
+  onCancel: () => void;
+  onAddField: () => void;
+  onRemoveField: (index: number) => void;
+  formData: {
+    userName: string;
+    password: string;
+    items: {
+      id: string;
+      name: string;
+    }[];
+  };
+};
+
+export const EditForm: React.FC<IProps> = ({
+  visible,
+  onOk,
+  onCancel,
+  formData,
+  onAddField,
+  onRemoveField,
+}) => {
   const {
     register,
     handleSubmit,
@@ -18,14 +41,9 @@ export const EditForm = ({ visible, onOk, onCancel, formData, onAddField, onRemo
     setError('error!!!');
   };
 
-  const handleAddField = () => {};
-
-  const handleRemoveField = (index) => {};
-
   useEffect(() => {
     setValue('form', formData);
   }, [formData]);
-
 
   const handleOnOk = () => {
     // onOk();
@@ -34,7 +52,7 @@ export const EditForm = ({ visible, onOk, onCancel, formData, onAddField, onRemo
     setError('');
   };
 
-  const submit = (data) => {
+  const submit = (data: any) => {
     onOk();
     console.log('aaaa');
     console.log('data: ', data);
@@ -88,10 +106,16 @@ export const EditForm = ({ visible, onOk, onCancel, formData, onAddField, onRemo
             className={styles.form__item}
           >
             <div>
-              <input type='text' {...register(`form.items.${index}.id`)} />
+              <input
+                type='text'
+                {...register(`form.items.${index}.id` as any)}
+              />
             </div>
             <div>
-              <input type='text' {...register(`form.items.${index}.name`)} />
+              <input
+                type='text'
+                {...register(`form.items.${index}.name` as any)}
+              />
             </div>
             <span onClick={() => onRemoveField(index)}>-</span>
           </FormItem>

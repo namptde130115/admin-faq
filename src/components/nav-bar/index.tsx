@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Menu, Avatar } from 'antd';
 import { LogoutIcon } from 'assets/icons/exit';
 import {
@@ -11,14 +11,22 @@ import {
 } from '@ant-design/icons';
 import styles from './index.module.scss';
 import clsx from 'clsx';
+import { useNavigate } from 'react-router-dom';
 
 export const NavBar: React.FC = () => {
   const [current, setCurrent] = useState<string>('mail');
+  const navigate = useNavigate();
 
+  let currentPage = window.location.pathname.substring(1);
+  console.log(currentPage);
   const handleClick = (e: any) => {
     console.log('click ', e);
-    setCurrent(e.key);
+    navigate(e.key);
   };
+
+  useEffect(() => {
+    setCurrent(currentPage);
+  }, [currentPage]);
 
   return (
     <nav className={styles.nav__container}>
@@ -35,7 +43,7 @@ export const NavBar: React.FC = () => {
           className={styles.nav__menuItem}
         ></Menu.Item>
         <Menu.Item
-          key='widget'
+          key='widget-setting'
           icon={<WechatOutlined className={styles.nav__menuItem__icon} />}
           className={styles.nav__menuItem}
         ></Menu.Item>
