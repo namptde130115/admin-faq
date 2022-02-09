@@ -5,14 +5,15 @@ interface Props {
   component: React.ComponentType;
   path?: string;
   roles: Array<string>;
+  isAuthenticated: boolean;
 }
 
 export const PrivateRoute: React.FC<Props> = ({
   component: RouteComponent,
   roles,
+  isAuthenticated,
 }) => {
   const user = { role: 'admin' };
-  const isAuthenticated = true;
   const userHasRequiredRole = user && roles.includes(user.role) ? true : false;
 
   if (isAuthenticated && userHasRequiredRole) {

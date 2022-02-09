@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Header } from 'components/header/index';
+import { LayoutAdmin } from 'layout/admin';
 import styles from './index.module.scss';
 import clsx from 'clsx';
 import { useForm } from 'react-hook-form';
@@ -35,7 +36,7 @@ export const InforPage: React.FC = () => {
   };
 
   return (
-    <>
+    <LayoutAdmin>
       <Header title='Changge Password' />
       <div className={clsx(styles.form__container, 'div__content')}>
         <form
@@ -73,6 +74,6 @@ export const InforPage: React.FC = () => {
           </div>
         </form>
       </div>
-    </>
+    </LayoutAdmin>
   );
 };

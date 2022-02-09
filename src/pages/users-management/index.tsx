@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { TableUser } from 'pages/users-management/table-user';
+import { LayoutAdmin } from 'layout/admin';
 import clsx from 'clsx';
 import { Button } from 'antd';
 import { useAppDispatch } from 'redux/hooks';
@@ -15,13 +16,15 @@ export const UserPage: React.FC = () => {
     setVisibleCreate((prev) => !prev);
   };
   return (
-    <div className={clsx('div__content')}>
-      {console.log('UserPage')}
-      <div>
-        <Button onClick={addUser}>add</Button>
-        <Button onClick={getToken}>Get Token</Button>
+    <LayoutAdmin>
+      <div className={clsx('div__content')}>
+        {console.log('UserPage')}
+        <div>
+          <Button onClick={addUser}>add</Button>
+          <Button onClick={getToken}>Get Token</Button>
+        </div>
+        <TableUser visibleCreate={visibleCreate} />
       </div>
-      <TableUser visibleCreate={visibleCreate} />
-    </div>
+    </LayoutAdmin>
   );
 };

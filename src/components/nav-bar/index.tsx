@@ -21,7 +21,7 @@ export const NavBar: React.FC = () => {
   console.log(currentPage);
   const handleClick = (e: any) => {
     console.log('click ', e);
-    navigate(e.key);
+    navigate(`/${e.key}`);
   };
 
   useEffect(() => {
@@ -63,7 +63,7 @@ export const NavBar: React.FC = () => {
           style={{ width: 100 }}
         >
           <Menu.Item
-            key='account'
+            key='user'
             icon={<UserOutlined className={styles.nav__menuItem__icon} />}
             className={styles.nav__menuItem}
           ></Menu.Item>
