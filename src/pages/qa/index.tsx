@@ -28,6 +28,8 @@ export const QaPage: React.FC = () => {
     setNumber(number + 1);
   }, [date]);
 
+  let a = 'test git desk';
+
   const getRangeDate = (value: any) => {
     if (value) {
       const startDate = moment(value[0]).format('YYYY-MM-DD') || 0;
