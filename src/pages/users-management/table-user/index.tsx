@@ -37,7 +37,7 @@ export const TableUser: React.FC<IProps> = ({ visibleCreate }) => {
 
   useEffect(() => {
     dispatch(fetchListUser());
-  }, []);
+  }, [dispatch]);
 
   const handleAddField = () => {
     console.log('handleAddField');

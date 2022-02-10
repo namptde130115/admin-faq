@@ -57,7 +57,7 @@ const data = [
 export const StackedBarChart: React.FC = () => {
   return (
     <BarChart
-      width={500}
+      width={600}
       height={300}
       data={data}
       margin={{

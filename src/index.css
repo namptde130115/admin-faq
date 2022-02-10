@@ -20,3 +20,8 @@ li.ant-menu-item.dashboard__menuItem:active {
   background: var(--color-blue-90) !important;
   color: #fff;
 }
+
+
+/* .recharts-wrapper{
+  height: 420px !important;
+} */
